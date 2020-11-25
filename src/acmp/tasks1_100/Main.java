@@ -11,6 +11,8 @@ public class Main {
         new Main().run();
     }
 
+//region SOLVED
+
     private static void task1(Scanner in, PrintWriter out) {
         String[] inputStr = in.nextLine().trim().split(" ");
         out.printf("%d", Integer.parseInt(inputStr[0]) + Integer.parseInt(inputStr[1]));
@@ -205,12 +207,99 @@ public class Main {
         out.println(count[n]);
     }
 
+    private static void task12(Scanner in, PrintWriter out){
+        int n = in.nextInt();
+        String[][] passengers = new String[n][10];
+        in.nextLine();
+        for (int i = 0; i < n; i++) {
+            passengers[i] = in.nextLine().trim().split(" ");
+        }
+        int counter = 0;
+        long a, b, c, x, y, x1, y1, x2, y2, x3, y3, x4, y4;
+        for (int i = 0; i < n; i++) {
+            x = Integer.parseInt(passengers[i][0]);
+            y = Integer.parseInt(passengers[i][1]);
+            x1 = Integer.parseInt(passengers[i][2]);
+            y1 = Integer.parseInt(passengers[i][3]);
+            x2 = Integer.parseInt(passengers[i][4]);
+            y2 = Integer.parseInt(passengers[i][5]);
+            x3 = Integer.parseInt(passengers[i][6]);
+            y3 = Integer.parseInt(passengers[i][7]);
+            x4 = Integer.parseInt(passengers[i][8]);
+            y4 = Integer.parseInt(passengers[i][9]);
+            a = (x1 - x) * (y2 - y1) - (x2 - x1) * (y1 - y);
+            b = (x2 - x) * (y3 - y2) - (x3 - x2) * (y2 - y);
+            c = (x3 - x) * (y1 - y3) - (x1 - x3) * (y3 - y);
+            if ((a >= 0 && b >= 0 && c >= 0) || (a <= 0 && b <= 0 && c <= 0)) {
+                counter++;
+            } else {
+                a = (x1 - x) * (y3 - y1) - (x3 - x1) * (y1 - y);
+                b = (x3 - x) * (y4 - y3) - (x4 - x3) * (y3 - y);
+                c = (x4 - x) * (y1 - y4) - (x1 - x4) * (y4 - y);
+                if ((a >= 0 && b >= 0 && c >= 0) || (a <= 0 && b <= 0 && c <= 0)) {
+                    counter++;
+                }
+            }
+        }
+        out.println(counter);
+    }
+
+    private static void task13(Scanner in, PrintWriter out) {
+        String[] input = in.nextLine().trim().split(" ");
+        byte cow = 0, bull = 0;
+        for (byte i = 0; i < 4; i++) {
+            if (input[0].charAt(i) == input[1].charAt(i)) {
+                cow++;
+            }
+            switch (i) {
+                case 0:
+                    if ((input[0].charAt(i) != input[1].charAt(i)) &&
+                            ((input[0].charAt(i) == input[1].charAt(1)) ||
+                            (input[0].charAt(i) == input[1].charAt(2)) ||
+                            (input[0].charAt(i) == input[1].charAt(3)))
+                    ) {
+                        bull++;
+                        break;
+                    }
+                case 1:
+                    if ((input[0].charAt(i) != input[1].charAt(i)) &&
+                            ((input[0].charAt(i) == input[1].charAt(0)) ||
+                            (input[0].charAt(i) == input[1].charAt(2)) ||
+                            (input[0].charAt(i) == input[1].charAt(3)))
+                    ) {
+                        bull++;
+                        break;
+                    }
+                case 2:
+                    if ((input[0].charAt(i) != input[1].charAt(i)) &&
+                            ((input[0].charAt(i) == input[1].charAt(1)) ||
+                            (input[0].charAt(i) == input[1].charAt(0)) ||
+                            (input[0].charAt(i) == input[1].charAt(3)))
+                    ) {
+                        bull++;
+                        break;
+                    }
+                case 3:
+                    if ((input[0].charAt(i) != input[1].charAt(i)) &&
+                            ((input[0].charAt(i) == input[1].charAt(1)) ||
+                            (input[0].charAt(i) == input[1].charAt(2)) ||
+                            (input[0].charAt(i) == input[1].charAt(0)))
+                    ) {
+                        bull++;
+                        break;
+                    }
+            }
+        }
+        out.printf("%d %d", cow, bull);
+    }
+
+//endregion
     private static void run() {
         try (
                 Scanner in = new Scanner(System.in);
                 PrintWriter out = new PrintWriter(System.out);
         ) {
-            task11(in, out);
+            task13(in, out);
         }
     }
 }
